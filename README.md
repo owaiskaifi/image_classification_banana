@@ -1,7 +1,14 @@
-information about files:
-convert_pytorch_model.py: converts the given model to onix
-server.py:main serverfile which will be used
-test.py: test inference code
+# information about files:
+
+  convert_pytorch_model.py: converts the given model to onix
+  
+  server.py:main serverfile which will be used
+  
+  test.py: test inference code 
+  
+  test_banana.py : file used to test banana deployment
+  
+  
 
 
 

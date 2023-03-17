@@ -5,7 +5,7 @@ from PIL import Image
 import onnxruntime
 from sanic import Sanic
 from sanic.response import json as sanic_json
-
+import base64
 # Load the ONNX ResNet model
 session = onnxruntime.InferenceSession("./resnet.onnx")
 input_name = session.get_inputs()[0].name
@@ -19,11 +19,10 @@ app = Sanic(__name__)
 async def predict(request):
     # Get the input image as bytes
     # print
-    image_bytes = request.files["image"][0].body
-
-    # Convert the image bytes to a PIL Image object
-    image = Image.open(io.BytesIO(image_bytes))
+    input_json = request.json
+    image_bytes = io.BytesIO(base64.b64decode(input_json['image']))
     
+    image = Image.open(image_bytes)
 
     # Preprocess the image
     image = image.resize((224, 224))
